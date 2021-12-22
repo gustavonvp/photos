@@ -7,6 +7,7 @@ import { PhotosService } from '../photos.service';
   styleUrls: ['./photo-show.component.css']
 })
 export class PhotoShowComponent implements OnInit {
+  photoUrl: string;
 
   constructor(private photosService: PhotosService) { 
     this.photosService.getPhoto().subscribe(response => {
@@ -17,6 +18,16 @@ export class PhotoShowComponent implements OnInit {
   
 
   ngOnInit() {
+  }
+
+  onClick() {
+    this.fetchPhoto();
+  }
+
+  fetchPhoto() {
+    this.photosService.getPhoto().subscribe(response => {
+      this.photoUrl = response.urls.regular;
+    })
   }
 
 }
